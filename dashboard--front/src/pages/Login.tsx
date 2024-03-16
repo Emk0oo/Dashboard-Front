@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { User } from "../models/User";
 import { loginin, register } from "../services/User.services";
 import Bouton from "../components/Bouton";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [username, setUsername] = useState("");
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate= useNavigate();
 
   const emailInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -58,6 +59,8 @@ function Login() {
       console.log(user);
       try {
         await loginin(user);
+        navigate("/form");
+
       } catch (e) {
         console.log(e);
       }
